@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="org.behive.com.workstream_platform.screens.home.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" />
+
+    <navigation
+        android:id="@+id/navigation2"
+        app:startDestination="@id/registrationFragment">
+        <fragment
+            android:id="@+id/registrationFragment"
+            android:name="org.behive.com.workstream_platform.screens.register.RegistrationFragment"
+            android:label="registration_fragment"
+            tools:layout="@layout/registration_fragment">
+            <action
+                android:id="@+id/action_contactsFragment_to_registrationFragment"
+                app:destination="@id/registrationFragment" />
+        </fragment>
+        <action
+            android:id="@+id/contactsFragment_to_registrationFragment"
+            app:destination="@id/registrationFragment" />
+        <action
+            android:id="@+id/action_global_contactsFragment"
+            app:destination="@id/homeFragment" />
+    </navigation>
+</navigation>
