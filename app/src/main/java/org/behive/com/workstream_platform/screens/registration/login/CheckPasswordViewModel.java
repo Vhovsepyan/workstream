@@ -26,7 +26,7 @@ public class CheckPasswordViewModel extends BaseVM {
 
     public CheckPasswordViewModel(@NonNull Application application) {
         super(application);
-        userRepository = new UserRepositoryImpl();
+        userRepository = UserRepositoryImpl.getsInstance();
 
         signInResponse = Transformations.switchMap(passwordLiveData, data -> {
             User user = new User("planet1", data);

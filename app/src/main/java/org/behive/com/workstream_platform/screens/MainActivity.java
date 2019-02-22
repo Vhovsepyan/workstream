@@ -1,26 +1,19 @@
 package org.behive.com.workstream_platform.screens;
 
-import android.app.Activity;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
+import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 
 import org.behive.com.workstream_platform.R;
-import org.behive.com.workstream_platform.utils.Utils;
 
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 public class MainActivity extends AppCompatActivity implements ActivityView {
@@ -55,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements ActivityView {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        return true;
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
@@ -70,12 +63,6 @@ public class MainActivity extends AppCompatActivity implements ActivityView {
         } else {
             super.onBackPressed();
         }
-    }
-
-
-    @Override
-    public boolean onSupportNavigateUp() {
-        return navController.navigateUp();
     }
 
     @Override

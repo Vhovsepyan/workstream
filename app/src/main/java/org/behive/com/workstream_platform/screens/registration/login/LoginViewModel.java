@@ -25,7 +25,7 @@ public class LoginViewModel extends BaseVM {
 
     public LoginViewModel(@NonNull Application application) {
         super(application);
-        userRepository = new UserRepositoryImpl();
+        userRepository = UserRepositoryImpl.getsInstance();
         userNameResponse = Transformations.switchMap(userNameLiveData, data -> {
                     return userRepository.checkUserName(data);
                 }

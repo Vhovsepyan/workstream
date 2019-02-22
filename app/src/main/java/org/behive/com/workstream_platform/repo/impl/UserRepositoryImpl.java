@@ -3,8 +3,6 @@ package org.behive.com.workstream_platform.repo.impl;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 
-import org.behive.com.workstream_platform.executors.ExecutorService;
-import org.behive.com.workstream_platform.executors.ExecutorType;
 import org.behive.com.workstream_platform.http.RestApi;
 import org.behive.com.workstream_platform.http.RestApiFactory;
 import org.behive.com.workstream_platform.model.BaseResponse;
@@ -13,8 +11,6 @@ import org.behive.com.workstream_platform.model.SignInResponse;
 import org.behive.com.workstream_platform.model.User;
 import org.behive.com.workstream_platform.repo.UserRepository;
 
-import java.util.concurrent.Executor;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -22,7 +18,9 @@ import retrofit2.Response;
 public class UserRepositoryImpl implements UserRepository {
     private RestApi restApi;
 
-    public UserRepositoryImpl() {
+    private static volatile UserRepository sInstance;
+
+    private UserRepositoryImpl() {
     }
 
     @Override
@@ -68,5 +66,17 @@ public class UserRepositoryImpl implements UserRepository {
             restApi = RestApiFactory.create();
         }
         return restApi;
+    }
+
+    public static UserRepository getsInstance() {
+        if (sInstance == null) {
+            synchronized (UserRepositoryImpl.class) {
+                if (sInstance == null) {
+                    sInstance = new UserRepositoryImpl();
+                }
+
+            }
+        }
+        return sInstance;
     }
 }
