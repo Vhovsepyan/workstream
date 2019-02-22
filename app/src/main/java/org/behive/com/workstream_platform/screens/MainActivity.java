@@ -26,7 +26,6 @@ import androidx.navigation.ui.NavigationUI;
 public class MainActivity extends AppCompatActivity implements ActivityView {
 
     private NavController navController;
-    private BottomNavigationView bottomNavigationView;
     private DrawerLayout drawer;
 
     @Override
@@ -35,18 +34,11 @@ public class MainActivity extends AppCompatActivity implements ActivityView {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         navController = Navigation.findNavController(this, R.id.main_nav_host_fragment);
 
         drawer = findViewById(R.id.drawer_layout);
-        AppBarConfiguration configuration =new  AppBarConfiguration.Builder()
-                .setDrawerLayout(drawer)
-                .build();
-
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        toggle.setToolbarNavigationClickListener(v -> onBackPressed());
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
 
         NavigationView navigationView = findViewById(R.id.nav_view);
 
@@ -55,11 +47,7 @@ public class MainActivity extends AppCompatActivity implements ActivityView {
             drawer.closeDrawer(GravityCompat.START);
         });
 
-        bottomNavigationView = findViewById(R.id.bottom_navigation);
-        bottomNavigationView.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
 
-        NavigationUI.setupWithNavController(bottomNavigationView, navController);
-        NavigationUI.setupWithNavController(navigationView, navController);
         NavigationUI.setupWithNavController(toolbar, navController, drawer);
         NavigationUI.setupActionBarWithNavController(this, navController, drawer);
 
@@ -94,42 +82,5 @@ public class MainActivity extends AppCompatActivity implements ActivityView {
     public NavController getNavController() {
         return navController;
     }
-
-    @Override
-    public void setNavigationVisible(boolean visible) {
-        bottomNavigationView.setVisibility(visible ? View.VISIBLE : View.GONE);
-    }
-
-
-    private BottomNavigationView.OnNavigationItemSelectedListener navigationItemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-            int id = menuItem.getItemId();
-            switch (id){
-                case R.id.activityFragment:{
-                    navController.navigate(R.id.activityFragment);
-                    break;
-                }
-                case R.id.tasksFragment: {
-                    navController.navigate(R.id.tasksFragment);
-                    break;
-                }
-                case R.id.messagesFragment: {
-                    navController.navigate(R.id.messagesFragment);
-                    break;
-                }
-                case R.id.workSpacesFragment: {
-                    navController.navigate(R.id.workSpacesFragment);
-                    break;
-                }
-                case R.id.contactsFragment2: {
-                    navController.navigate(R.id.contactsFragment2);
-                    break;
-                }
-            }
-            return false;
-        }
-    };
-
 
 }

@@ -4,6 +4,4 @@ import androidx.navigation.NavController;
 
 public interface ActivityView {
     NavController getNavController();
-
-    void setNavigationVisible(boolean visible);
 }

@@ -35,13 +35,12 @@ public class CheckUserNameFragment extends BaseFragment<CheckUsernameFragmentBin
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        activityView = ((MainActivity)getActivity());
+        activityView = ((MainActivity) getActivity());
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        activityView.setNavigationVisible(false);
         navController = activityView.getNavController();
         return super.onCreateView(inflater, container, savedInstanceState);
     }
@@ -57,8 +56,8 @@ public class CheckUserNameFragment extends BaseFragment<CheckUsernameFragmentBin
         viewModel.getUserNameResponse().observe(this, new Observer<BaseResponse<CheckUserResponse>>() {
             @Override
             public void onChanged(@Nullable BaseResponse<CheckUserResponse> baseResponse) {
-                if (baseResponse != null && baseResponse.getSuccess() ){
-                    if (baseResponse.getData() != null && !baseResponse.getData().getResult()){
+                if (baseResponse != null && baseResponse.getSuccess()) {
+                    if (baseResponse.getData() != null && !baseResponse.getData().getResult()) {
                         viewModel.setErrorMessage("");
                         AppLog.i(TAG + " baseResponse = " + baseResponse);
                         getNavController().navigate(R.id.action_checkUserNameFragment_to_checkPasswordFragment);

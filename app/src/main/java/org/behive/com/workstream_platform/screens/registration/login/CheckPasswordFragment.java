@@ -22,17 +22,17 @@ public class CheckPasswordFragment extends BaseFragment<CheckPasswordFragmentBin
     protected BaseVM onCreateViewModel() {
         viewModel = ViewModelProviders.of(this).get(CheckPasswordViewModel.class);
         viewModel.getSignInResponse().observe(this, baseResponse -> {
-            if (baseResponse != null && baseResponse.getSuccess() ){
+            if (baseResponse != null && baseResponse.getSuccess()) {
                 SignInResponse data = baseResponse.getData();
-                if (data != null){
+                if (data != null) {
                     viewModel.setErrorMessage("");
                     AppLog.i(TAG + " baseResponse = " + baseResponse);
                     boolean isSuccess = SharedPrefs.getInstance().putString(
                             SharedPrefs.Constants.IS_USER_LOGGED_IN_KEY,
                             data.getAccessToken());
-                    if (isSuccess){
+                    if (isSuccess) {
                         Utils.hideKeyboardFrom(editText, getActivity());
-                        getNavController().navigate(R.id.action_checkPasswordFragment_to_activitiesFragment);
+                        getNavController().navigate(R.id.action_checkPasswordFragment_to_homeFragment);
                     }
                 } else {
                     viewModel.setErrorMessage(getString(R.string.incorrect_username_password_text));
@@ -42,7 +42,7 @@ public class CheckPasswordFragment extends BaseFragment<CheckPasswordFragmentBin
                 viewModel.setErrorMessage(getString(R.string.something_went_wrong_text));
                 AppLog.e(TAG + " baseResponse = " + baseResponse);
             }
-                });
+        });
         return viewModel;
     }
 

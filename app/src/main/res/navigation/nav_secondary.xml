@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_secondary"
+    app:startDestination="@id/activityFragment">
+
+    <fragment
+        android:id="@+id/activityFragment"
+        android:name="org.behive.com.workstream_platform.screens.home.activity.ActivityFragment"
+        tools:layout="@layout/fragment_activity"/>
+
+    <fragment
+        android:id="@+id/tasksFragment"
+        android:name="org.behive.com.workstream_platform.screens.home.tasks.TasksFragment"
+        tools:layout="@layout/fragment_tasks"/>
+
+    <fragment
+        android:id="@+id/messagesFragment"
+        android:name="org.behive.com.workstream_platform.screens.home.messages.MessagesFragment"
+        tools:layout="@layout/fragment_messages"/>
+
+    <fragment
+        android:id="@+id/workSpacesFragment"
+        android:name="org.behive.com.workstream_platform.screens.home.workspaces.WorkSpacesFragment"
+        tools:layout="@layout/fragment_work_spaces"/>
+
+    <fragment
+        android:id="@+id/contactsFragment2"
+        android:name="org.behive.com.workstream_platform.screens.home.contacts.ContactsFragment"
+        tools:layout="@layout/fragment_contacts"/>
+
+
+</navigation>

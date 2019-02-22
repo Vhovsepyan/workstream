@@ -3,15 +3,25 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/activityFragment">
+    app:startDestination="@id/homeFragment">
 
     <navigation
         android:id="@+id/navigation2"
         app:startDestination="@id/welcomeFragment">
+
+        <fragment
+            android:id="@+id/welcomeFragment"
+            android:name="org.behive.com.workstream_platform.screens.registration.welcome.WelcomeFragment"
+            android:label="" >
+            <action
+                android:id="@+id/action_welcomeFragment_to_checkUsernameFragment"
+                app:destination="@id/checkUserNameFragment" />
+        </fragment>
+
         <fragment
             android:id="@+id/checkUserNameFragment"
             android:name="org.behive.com.workstream_platform.screens.registration.login.CheckUserNameFragment"
-            android:label="registration_fragment"
+            android:label=""
             tools:layout="@layout/check_username_fragment">
             <action
                 android:id="@+id/action_checkUserNameFragment_to_checkPasswordFragment"
@@ -19,47 +29,20 @@
         </fragment>
 
         <fragment
-            android:id="@+id/welcomeFragment"
-            android:name="org.behive.com.workstream_platform.screens.registration.welcome.WelcomeFragment"
-            android:label="WelcomeFragment" >
-            <action
-                android:id="@+id/action_welcomeFragment_to_checkUsernameFragment"
-                app:destination="@id/checkUserNameFragment" />
-        </fragment>
-        <fragment
             android:id="@+id/checkPasswordFragment"
             android:name="org.behive.com.workstream_platform.screens.registration.login.CheckPasswordFragment"
-            android:label="CheckPasswordFragment">
+            android:label="">
             <action
-                android:id="@+id/action_checkPasswordFragment_to_activitiesFragment"
+                android:id="@+id/action_checkPasswordFragment_to_homeFragment"
                 app:launchSingleTop="true"
                 app:popUpTo="@+id/navigation"
                 app:popUpToInclusive="true"
-                app:destination="@+id/activityFragment"/>
+                app:destination="@+id/homeFragment"/>
         </fragment>
     </navigation>
+
     <fragment
-        android:id="@+id/activityFragment"
-        android:name="org.behive.com.workstream_platform.screens.home.activity.ActivityFragment"
-        android:label="fragment_activity"
-        tools:layout="@layout/fragment_activity" />
-    <fragment
-        android:id="@+id/messagesFragment"
-        android:name="org.behive.com.workstream_platform.screens.home.messages.MessagesFragment"
-        android:label="fragment_messages"
-        tools:layout="@layout/fragment_messages" />
-    <fragment
-        android:id="@+id/contactsFragment2"
-        android:name="org.behive.com.workstream_platform.screens.home.contacts.ContactsFragment"
-        android:label="fragment_contacts"
-        tools:layout="@layout/fragment_contacts" />
-    <fragment
-        android:id="@+id/workSpacesFragment"
-        android:name="org.behive.com.workstream_platform.screens.home.workspaces.WorkSpacesFragment"
-        android:label="fragment_work_spaces"
-        tools:layout="@layout/fragment_work_spaces" />
-    <fragment
-        android:id="@+id/tasksFragment"
-        android:name="org.behive.com.workstream_platform.screens.home.tasks.TasksFragment"
-        android:label="TasksFragment" />
+        android:id="@+id/homeFragment"
+        android:name="org.behive.com.workstream_platform.screens.home.HomeFragment"
+        android:label="" />
 </navigation>
