@@ -26,6 +26,13 @@
     <string name="title_notifications">Notifications</string>
     <string name="version_name_text">Version %1$s</string>
     <string name="dont_have_account_text">Don\'t have an account? <u>SIGN UP</u></string>
+    
+    <!--bottom menu titles-->
+    <string name="activity_tab_text">Activity</string>
+    <string name="tasks_tab_text">Tasks</string>
+    <string name="messages_tab_text">Messages</string>
+    <string name="workspaces_tab_text">Workspaces</string>
+    <string name="contacts_tab_text">Contacts</string>
 
 
     <!-- error messages -->

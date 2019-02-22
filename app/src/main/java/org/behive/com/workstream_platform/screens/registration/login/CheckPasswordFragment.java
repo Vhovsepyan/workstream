@@ -32,7 +32,7 @@ public class CheckPasswordFragment extends BaseFragment<CheckPasswordFragmentBin
                             data.getAccessToken());
                     if (isSuccess){
                         Utils.hideKeyboardFrom(editText, getActivity());
-                        getNavController().navigate(R.id.action_checkPasswordFragment_to_homeFragment);
+                        getNavController().navigate(R.id.action_checkPasswordFragment_to_activitiesFragment);
                     }
                 } else {
                     viewModel.setErrorMessage(getString(R.string.incorrect_username_password_text));

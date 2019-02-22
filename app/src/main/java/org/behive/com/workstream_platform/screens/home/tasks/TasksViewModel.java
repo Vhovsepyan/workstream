@@ -1,13 +1,13 @@
-package org.behive.com.workstream_platform.screens.home;
+package org.behive.com.workstream_platform.screens.home.tasks;
 
 import android.app.Application;
 import android.support.annotation.NonNull;
 
 import org.behive.com.workstream_platform.screens.BaseVM;
 
-public class HomeViewModel extends BaseVM {
+public class TasksViewModel extends BaseVM {
 
-    public HomeViewModel(@NonNull Application application) {
+    public TasksViewModel(@NonNull Application application) {
         super(application);
     }
 }
