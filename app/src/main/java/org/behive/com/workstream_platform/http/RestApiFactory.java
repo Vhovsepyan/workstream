@@ -19,7 +19,8 @@ public class RestApiFactory {
         httpClient.addInterceptor(chain -> {
             Request request = chain.request()
                     .newBuilder()
-                    .addHeader("api-key", "5c732610-0d3a-43fa-828e-12ae6b8ebd85")
+                    .addHeader("Content-Type", "application/json")
+                    .addHeader("Accept", "application/json")
                     .build();
             return chain.proceed(request);
         });

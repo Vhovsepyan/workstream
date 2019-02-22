@@ -6,25 +6,31 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
-    <string name="pin_text">Pin</string>
-    <string name="pinned_text">Pinned</string>
-    <string name="see_all_text">See all</string>
-    <string name="list_text">List</string>
-    <string name="stagger_text">Stagger</string>
-    <string name="done">Done</string>
     <string name="home_page_title">Home</string>
-    <string name="article_detail_title">Article detail</string>
-    <string name="channel_description">You have new articles</string>
-
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
-    <string name="name_text">Name</string>
+
     <string name="email_text">Email</string>
-    <string name="password_text">Password</string>
+
     <string name="sign_up_text">Sign Up</string>
     <string name="logout_text">Logout</string>
     <string name="login_text">Login</string>
-    <string name="enter_your_name_text">Enter your name</string>
+    <string name="password_text">Password</string>
+    <string name="username_text">Username</string>
+    <string name="enter_your_username_text">Enter your username</string>
     <string name="enter_your_password_text">Enter your password</string>
+
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="version_name_text">Version %1$s</string>
+    <string name="dont_have_account_text">Don\'t have an account? <u>SIGN UP</u></string>
+
+
+    <!-- error messages -->
+    <string name="incorrect_username_text">Incorrect username</string>
+    <string name="incorrect_password_text">Incorrect password</string>
+    <string name="incorrect_username_password_text">Invalid username password combination</string>
+    <string name="something_went_wrong_text">Something went wrong</string>
 </resources>

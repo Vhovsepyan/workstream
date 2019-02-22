@@ -13,21 +13,35 @@
 
     <navigation
         android:id="@+id/navigation2"
-        app:startDestination="@id/registrationFragment">
+        app:startDestination="@id/welcomeFragment">
         <fragment
-            android:id="@+id/registrationFragment"
-            android:name="org.behive.com.workstream_platform.screens.register.RegistrationFragment"
+            android:id="@+id/checkUserNameFragment"
+            android:name="org.behive.com.workstream_platform.screens.registration.login.CheckUserNameFragment"
             android:label="registration_fragment"
-            tools:layout="@layout/registration_fragment">
+            tools:layout="@layout/check_username_fragment">
             <action
-                android:id="@+id/action_contactsFragment_to_registrationFragment"
-                app:destination="@id/registrationFragment" />
+                android:id="@+id/action_checkUserNameFragment_to_checkPasswordFragment"
+                app:destination="@id/checkPasswordFragment" />
         </fragment>
-        <action
-            android:id="@+id/contactsFragment_to_registrationFragment"
-            app:destination="@id/registrationFragment" />
-        <action
-            android:id="@+id/action_global_contactsFragment"
-            app:destination="@id/homeFragment" />
+
+        <fragment
+            android:id="@+id/welcomeFragment"
+            android:name="org.behive.com.workstream_platform.screens.registration.welcome.WelcomeFragment"
+            android:label="WelcomeFragment" >
+            <action
+                android:id="@+id/action_welcomeFragment_to_checkUsernameFragment"
+                app:destination="@id/checkUserNameFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/checkPasswordFragment"
+            android:name="org.behive.com.workstream_platform.screens.registration.login.CheckPasswordFragment"
+            android:label="CheckPasswordFragment">
+            <action
+                android:id="@+id/action_checkPasswordFragment_to_homeFragment"
+                app:launchSingleTop="true"
+                app:popUpTo="@+id/navigation"
+                app:popUpToInclusive="true"
+                app:destination="@+id/homeFragment"/>
+        </fragment>
     </navigation>
 </navigation>

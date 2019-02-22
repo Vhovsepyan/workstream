@@ -3,7 +3,7 @@ package org.behive.com.workstream_platform.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Result {
+public class CheckUserResponse {
 
     @SerializedName("result")
     @Expose
@@ -15,5 +15,12 @@ public class Result {
 
     public void setResult(Boolean result) {
         this.result = result;
+    }
+
+    @Override
+    public String toString() {
+        return "CheckUserResponse{" +
+                "result=" + result +
+                '}';
     }
 }

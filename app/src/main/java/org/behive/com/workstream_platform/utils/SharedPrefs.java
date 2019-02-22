@@ -19,10 +19,16 @@ public class SharedPrefs {
         return sharedPrefs;
     }
 
-    public void putString(String key, String value) {
+    public void putStringAsync(String key, String value) {
         SharedPreferences.Editor e = mMyPreferences.edit();
         e.putString(key, value);
         e.apply();
+    }
+
+    public boolean putString(String key, String value) {
+        SharedPreferences.Editor e = mMyPreferences.edit();
+        e.putString(key, value);
+        return e.commit();
     }
 
     public void putInt(String key, int value) {

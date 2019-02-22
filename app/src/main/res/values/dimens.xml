@@ -18,7 +18,14 @@
 
 
     <!--text sizes-->
-    <dimen name="small_text_size">14sp</dimen>
-    <dimen name="middle_text_size">18sp</dimen>
-    <dimen name="big_text_size">22sp</dimen>
+    <dimen name="small_text_size">13sp</dimen>
+    <dimen name="middle_text_size">19sp</dimen>
+    <dimen name="big_text_size">23sp</dimen>
+
+
+    <!--splash screen dimens-->
+    <dimen name="splash_bottom">307dp</dimen>
+    <dimen name="splash_left">136dp</dimen>
+    <dimen name="splash_right">136dp</dimen>
+    <dimen name="splash_top">208dp</dimen>
 </resources>

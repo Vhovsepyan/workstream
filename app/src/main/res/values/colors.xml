@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <color name="colorPrimary">#15000000</color>
+    <color name="colorPrimaryDark">#6a3dff</color>
+    <color name="colorAccent">#caced1</color>
+
+    <color name="steel">#848a91</color>
+    <color name="charcoal_grey">#3f4244</color>
+    <color name="silver">#caced1</color>
+    <color name="watermelon">#f05659</color>
 </resources>

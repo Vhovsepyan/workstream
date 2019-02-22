@@ -1,6 +1,8 @@
 package org.behive.com.workstream_platform.screens.home;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
+import android.databinding.ViewDataBinding;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,17 +11,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import org.behive.com.workstream_platform.BR;
 import org.behive.com.workstream_platform.R;
 import org.behive.com.workstream_platform.screens.ActivityView;
+import org.behive.com.workstream_platform.screens.BaseFragment;
+import org.behive.com.workstream_platform.screens.BaseVM;
 import org.behive.com.workstream_platform.screens.MainActivity;
 import org.behive.com.workstream_platform.utils.SharedPrefs;
 
 import androidx.navigation.NavController;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends BaseFragment {
     private NavController navController;
     private ActivityView activityView;
-
+    private HomeViewModel viewModel;
     public HomeFragment() {
         // Required empty public constructor
     }
@@ -27,6 +32,7 @@ public class HomeFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -40,7 +46,28 @@ public class HomeFragment extends Fragment {
         }
         activityView.setNavigationVisible(true);
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        return super.onCreateView(inflater,container, savedInstanceState);
+    }
+
+    @Override
+    protected BaseVM onCreateViewModel() {
+        viewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
+        return viewModel;
+    }
+
+    @Override
+    protected void onBindViewModel(ViewDataBinding binding) {
+
+    }
+
+    @Override
+    public int getVariable() {
+        return BR.viewModel;
+    }
+
+    @Override
+    public int getLayoutId() {
+        return R.layout.fragment_home;
     }
 
     @Override

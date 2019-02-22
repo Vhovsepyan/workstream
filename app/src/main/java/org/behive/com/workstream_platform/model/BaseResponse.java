@@ -3,25 +3,27 @@ package org.behive.com.workstream_platform.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class BaseResponse {
+public class BaseResponse<T> {
 
     @SerializedName("success")
     @Expose
-    private Boolean success;
+    private boolean success;
 
     @SerializedName("status")
     @Expose
     private Integer status;
 
-    @SerializedName("result")
+    @SerializedName("data")
     @Expose
-    private Result result;
+    private T data;
 
-    public Boolean getSuccess() {
+    private String errorMessage;
+
+    public boolean getSuccess() {
         return success;
     }
 
-    public void setSuccess(Boolean success) {
+    public void setSuccess(boolean success) {
         this.success = success;
     }
 
@@ -33,11 +35,29 @@ public class BaseResponse {
         this.status = status;
     }
 
-    public Result getResult() {
-        return result;
+    public T getData() {
+        return data;
     }
 
-    public void setResult(Result result) {
-        this.result = result;
+    public void setData(T data) {
+        this.data = data;
+    }
+
+    public String getErrorMessage() {
+        return errorMessage;
+    }
+
+    public void setErrorMessage(String errorMessage) {
+        this.errorMessage = errorMessage;
+    }
+
+    @Override
+    public String toString() {
+        return "BaseResponse{" +
+                "success=" + success +
+                ", status=" + status +
+                ", data=" + data +
+                ", errorMessage='" + errorMessage + '\'' +
+                '}';
     }
 }
