@@ -8,18 +8,47 @@
             type="org.behive.com.workstream_platform.screens.home.tasks.TasksViewModel" />
     </data>
 
-    <FrameLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/colorHomeBg">
 
-        <!-- TODO: Update blank fragment layout -->
-        <TextView
+        <RelativeLayout
+            android:id="@+id/quck_add_layout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/tasks_tab_text"
-            android:gravity="center"/>
+            android:layout_height="@dimen/tasks_edit_text_layout_height"
+            android:layout_alignParentTop="true"
+            android:layout_margin="@dimen/padding"
+            android:background="@drawable/shadow_border"
+            android:orientation="horizontal">
 
-    </FrameLayout>
+            <EditText
+                android:id="@+id/quick_add_edittext"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/tasks_edit_text_height"
+                android:layout_margin="@dimen/padding"
+                android:layout_centerVertical="true"
+                android:layout_toStartOf="@+id/mic_icon"
+                android:background="@null"
+                android:hint="@string/quick_add_text"
+                android:textSize="@dimen/description_text_size" />
 
+            <ImageView
+                android:id="@+id/mic_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/padding"
+                android:src="@drawable/ic_mic_grey" />
+        </RelativeLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/tasks_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/quck_add_layout" />
+
+    </RelativeLayout>
 
 </layout>

@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="item"
+            type="org.behive.com.workstream_platform.model.task.Task" />
+
+        <variable
+            name="holder"
+            type="org.behive.com.workstream_platform.screens.home.viewholder.TaskViewHolder" />
+
+    </data>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/task_item_height">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/task_item_height"
+            android:orientation="horizontal"
+            app:taskItemBackground="@{item.priority}">
+
+            <View
+                android:layout_width="3dp"
+                android:layout_height="@dimen/task_item_height"
+                app:taskPriorityBackground="@{item.priority}" />
+            <LinearLayout
+                android:layout_width="72dp"
+                android:layout_height="@dimen/task_item_height"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/priority_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/padding"
+                    android:fontFamily="sans-serif"
+                    android:gravity="center_horizontal"
+                    android:textAllCaps="true"
+                    android:textSize="@dimen/small_text_size"
+                    android:textStyle="bold"
+                    app:taskPriorityText="@{item.priority}"
+                    app:taskPriorityTextColor="@{item.priority}"
+                    tools:text="LOW" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text=" Could \n not \n find "
+                        android:gravity="center_horizontal"/>
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="@dimen/vertical_divider_height"
+                android:layout_gravity="center_vertical"
+                android:background="@color/steel"
+                android:paddingTop="@dimen/padding"
+                android:paddingBottom="@dimen/padding" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/task_item_height">
+
+                <TextView
+                    android:id="@+id/description_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="@dimen/padding"
+                    android:layout_marginTop="@dimen/padding"
+                    android:ellipsize="end"
+                    android:lineHeight="@dimen/description_line_height"
+                    android:text="@{item.description}"
+                    android:textSize="@dimen/description_text_size"
+                    tools:text="Description of the task" />
+
+                <TextView
+                    android:id="@+id/assignee_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginStart="@dimen/padding"
+                    android:layout_marginBottom="@dimen/padding"
+                    android:lineHeight="@dimen/assignee_text_line_height"
+                    android:text="@string/no_assignee_text"
+                    android:textSize="@dimen/assignee_text_size"
+                    android:visibility="@{item.assignees.empty ? View.VISIBLE : View.GONE}"
+                    tools:text="No assignee" />
+
+                <LinearLayout
+                    android:id="@+id/assignees_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginStart="@dimen/padding"
+                    android:layout_marginBottom="@dimen/padding"
+                    android:orientation="horizontal"
+                    android:visibility="@{item.assignees.empty ? View.GONE : View.VISIBLE}"
+                    app:initAssigneesLayout="@{item.assignees}" />
+
+                <ImageView
+                    android:id="@+id/more_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/padding"
+                    android:src="@drawable/ic_more_vert_steel" />
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignEnd="@+id/more_icon"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginEnd="@dimen/padding"
+                    android:layout_marginBottom="@dimen/padding"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/location_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_location_grey"
+                        android:visibility="@{item.workspaces.empty ? View.GONE : View.VISIBLE}"
+                        tools:src="@drawable/ic_location_grey" />
+
+                    <ImageView
+                        android:id="@+id/attachement_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_attachment"
+                        android:visibility="@{item.attachments.empty ? View.GONE : View.VISIBLE}"
+                        tools:src="@drawable/ic_attachment" />
+                </LinearLayout>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/silver"/>
+
+
+    </RelativeLayout>
+</layout>

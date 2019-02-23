@@ -27,9 +27,13 @@ public class CheckPasswordFragment extends BaseFragment<CheckPasswordFragmentBin
                 if (data != null) {
                     viewModel.setErrorMessage("");
                     AppLog.i(TAG + " baseResponse = " + baseResponse);
+                    StringBuilder stringBuilder = new StringBuilder();
+                    stringBuilder.append(data.getTokenType())
+                            .append(" ")
+                            .append(data.getAccessToken());
                     boolean isSuccess = SharedPrefs.getInstance().putString(
                             SharedPrefs.Constants.IS_USER_LOGGED_IN_KEY,
-                            data.getAccessToken());
+                            stringBuilder.toString());
                     if (isSuccess) {
                         Utils.hideKeyboardFrom(editText, getActivity());
                         getNavController().navigate(R.id.action_checkPasswordFragment_to_homeFragment);

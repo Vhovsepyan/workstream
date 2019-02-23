@@ -1,5 +1,6 @@
 package org.behive.com.workstream_platform.screens;
 
+import android.app.Activity;
 import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
@@ -10,8 +11,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.support.v7.widget.Toolbar;
 
 import org.behive.com.workstream_platform.MyApplication;
+import org.behive.com.workstream_platform.R;
 
 import androidx.navigation.NavController;
 
@@ -57,6 +61,14 @@ public abstract class BaseFragment<B extends ViewDataBinding> extends Fragment {
         binding.executePendingBindings();
     }
 
+    protected LinearLayout getToolbarCustomLayout(Activity activity){
+        Toolbar toolbar = activity.findViewById(R.id.toolbar);
+        return toolbar.findViewById(R.id.toolbar_custom_view);
+    }
+
+    protected Toolbar getToolbarLayout(Activity activity){
+        return activity.findViewById(R.id.toolbar);
+    }
     @Override
     public void onStart() {
         super.onStart();

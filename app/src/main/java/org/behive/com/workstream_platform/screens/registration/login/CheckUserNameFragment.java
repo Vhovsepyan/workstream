@@ -27,20 +27,15 @@ import androidx.navigation.NavController;
 public class CheckUserNameFragment extends BaseFragment<CheckUsernameFragmentBinding> {
     private static final String TAG = CheckUserNameFragment.class.getSimpleName();
     private LoginViewModel viewModel;
-    private NavController navController;
-    private ActivityView activityView;
-    private EditText editText;
 
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        activityView = ((MainActivity) getActivity());
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        navController = activityView.getNavController();
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 
@@ -75,7 +70,6 @@ public class CheckUserNameFragment extends BaseFragment<CheckUsernameFragmentBin
 
     @Override
     protected void onBindViewModel(CheckUsernameFragmentBinding binding) {
-        editText = binding.usernameEditText;
     }
 
     @Override

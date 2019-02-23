@@ -1,5 +1,6 @@
 package org.behive.com.workstream_platform.http;
 
+import org.behive.com.workstream_platform.utils.SharedPrefs;
 import org.behive.com.workstream_platform.utils.UrlConstants;
 
 import okhttp3.OkHttpClient;
@@ -11,6 +12,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RestApiFactory {
 
     public static RestApi create() {
+        String token = SharedPrefs.getInstance().getString(SharedPrefs.Constants.IS_USER_LOGGED_IN_KEY, "");
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
         logging.setLevel(HttpLoggingInterceptor.Level.BODY);
 
@@ -21,6 +23,7 @@ public class RestApiFactory {
                     .newBuilder()
                     .addHeader("Content-Type", "application/json")
                     .addHeader("Accept", "application/json")
+                    .addHeader("Authorization", token)
                     .build();
             return chain.proceed(request);
         });

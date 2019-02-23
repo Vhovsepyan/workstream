@@ -48,6 +48,7 @@ public class WelcomeFragment extends BaseFragment<WelcomeFragmentBinding> {
         super.onViewCreated(view, savedInstanceState);
         setHasOptionsMenu(true);
         activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        getToolbarCustomLayout(getActivity()).setVisibility(View.GONE);
         ActionBar actionBar = activity.getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayShowHomeEnabled(false);

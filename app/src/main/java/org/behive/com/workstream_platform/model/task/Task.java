@@ -7,40 +7,55 @@ import java.util.List;
 
 public class Task {
 
-    @SerializedName("branchId")
+    @SerializedName("taskId")
     @Expose
-    private Integer branchId;
+    private Integer taskId;
     @SerializedName("description")
     @Expose
     private String description;
-    @SerializedName("dueDate")
-    @Expose
-    private String dueDate;
     @SerializedName("status")
     @Expose
     private Integer status;
+    @SerializedName("oldStatus")
+    @Expose
+    private Integer oldStatus;
     @SerializedName("priority")
     @Expose
     private Integer priority;
-    @SerializedName("taskLocation")
+    @SerializedName("creatorId")
     @Expose
-    private TaskLocation taskLocation;
-    @SerializedName("assigneeIds")
+    private String creatorId;
+    @SerializedName("creator")
     @Expose
-    private List<String> assigneeIds = null;
-    @SerializedName("workspaceIds")
+    private Creator creator;
+    @SerializedName("branchId")
     @Expose
-    private List<Integer> workspaceIds = null;
+    private Integer branchId;
+    @SerializedName("isOverdue")
+    @Expose
+    private Boolean isOverdue;
+    @SerializedName("isSeen")
+    @Expose
+    private Boolean isSeen;
+    @SerializedName("canChange")
+    @Expose
+    private Boolean canChange;
+    @SerializedName("assignees")
+    @Expose
+    private List<Object> assignees = null;
+    @SerializedName("workspaces")
+    @Expose
+    private List<Object> workspaces = null;
     @SerializedName("attachments")
     @Expose
-    private List<Attachment> attachments = null;
+    private List<Object> attachments = null;
 
-    public Integer getBranchId() {
-        return branchId;
+    public Integer getTaskId() {
+        return taskId;
     }
 
-    public void setBranchId(Integer branchId) {
-        this.branchId = branchId;
+    public void setTaskId(Integer taskId) {
+        this.taskId = taskId;
     }
 
     public String getDescription() {
@@ -51,20 +66,20 @@ public class Task {
         this.description = description;
     }
 
-    public String getDueDate() {
-        return dueDate;
-    }
-
-    public void setDueDate(String dueDate) {
-        this.dueDate = dueDate;
-    }
-
     public Integer getStatus() {
         return status;
     }
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public Integer getOldStatus() {
+        return oldStatus;
+    }
+
+    public void setOldStatus(Integer oldStatus) {
+        this.oldStatus = oldStatus;
     }
 
     public Integer getPriority() {
@@ -75,36 +90,95 @@ public class Task {
         this.priority = priority;
     }
 
-    public TaskLocation getTaskLocation() {
-        return taskLocation;
+    public String getCreatorId() {
+        return creatorId;
     }
 
-    public void setTaskLocation(TaskLocation taskLocation) {
-        this.taskLocation = taskLocation;
+    public void setCreatorId(String creatorId) {
+        this.creatorId = creatorId;
     }
 
-    public List<String> getAssigneeIds() {
-        return assigneeIds;
+    public Creator getCreator() {
+        return creator;
     }
 
-    public void setAssigneeIds(List<String> assigneeIds) {
-        this.assigneeIds = assigneeIds;
+    public void setCreator(Creator creator) {
+        this.creator = creator;
     }
 
-    public List<Integer> getWorkspaceIds() {
-        return workspaceIds;
+    public Integer getBranchId() {
+        return branchId;
     }
 
-    public void setWorkspaceIds(List<Integer> workspaceIds) {
-        this.workspaceIds = workspaceIds;
+    public void setBranchId(Integer branchId) {
+        this.branchId = branchId;
     }
 
-    public List<Attachment> getAttachments() {
+    public Boolean getIsOverdue() {
+        return isOverdue;
+    }
+
+    public void setIsOverdue(Boolean isOverdue) {
+        this.isOverdue = isOverdue;
+    }
+
+    public Boolean getIsSeen() {
+        return isSeen;
+    }
+
+    public void setIsSeen(Boolean isSeen) {
+        this.isSeen = isSeen;
+    }
+
+    public Boolean getCanChange() {
+        return canChange;
+    }
+
+    public void setCanChange(Boolean canChange) {
+        this.canChange = canChange;
+    }
+
+    public List<Object> getAssignees() {
+        return assignees;
+    }
+
+    public void setAssignees(List<Object> assignees) {
+        this.assignees = assignees;
+    }
+
+    public List<Object> getWorkspaces() {
+        return workspaces;
+    }
+
+    public void setWorkspaces(List<Object> workspaces) {
+        this.workspaces = workspaces;
+    }
+
+    public List<Object> getAttachments() {
         return attachments;
     }
 
-    public void setAttachments(List<Attachment> attachments) {
+    public void setAttachments(List<Object> attachments) {
         this.attachments = attachments;
     }
 
+    @Override
+    public String toString() {
+        return "Task{" +
+                "taskId=" + taskId +
+                ", description='" + description + '\'' +
+                ", status=" + status +
+                ", oldStatus=" + oldStatus +
+                ", priority=" + priority +
+                ", creatorId='" + creatorId + '\'' +
+                ", creator=" + creator +
+                ", branchId=" + branchId +
+                ", isOverdue=" + isOverdue +
+                ", isSeen=" + isSeen +
+                ", canChange=" + canChange +
+                ", assignees=" + assignees +
+                ", workspaces=" + workspaces +
+                ", attachments=" + attachments +
+                '}';
+    }
 }
