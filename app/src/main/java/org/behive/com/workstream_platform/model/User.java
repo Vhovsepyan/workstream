@@ -1,49 +1,73 @@
 package org.behive.com.workstream_platform.model;
 
+import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
+import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.NonNull;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.internal.LinkedTreeMap;
 
+import org.behive.com.workstream_platform.utils.DbConstants;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity(tableName = DbConstants.User.USER_TABLE_NAME)
 public class User {
 
-
     @SerializedName("userId")
-    @Expose
+    @PrimaryKey
+    @NonNull
+    @ColumnInfo(name = DbConstants.User.USER_ID)
     private String userId;
+
     @SerializedName("username")
-    @Expose
+    @ColumnInfo(name = DbConstants.User.USER_NAME)
     private String username;
+
     @SerializedName("password")
-    @Expose
+    @Ignore
     private String password;
+
     @SerializedName("emailConfirmed")
-    @Expose
+    @Ignore
     private Boolean emailConfirmed;
+
     @SerializedName("isActive")
-    @Expose
+    @Ignore
     private Boolean isActive;
+
     @SerializedName("firstName")
-    @Expose
+    @ColumnInfo(name = DbConstants.User.FIRST_NAME)
     private String firstName;
+
     @SerializedName("lastName")
-    @Expose
+    @ColumnInfo(name = DbConstants.User.LAST_NAME)
     private String lastName;
+
     @SerializedName("disconnectedAt")
-    @Expose
+    @Ignore
     private String disconnectedAt;
+
     @SerializedName("lastActionTime")
-    @Expose
+    @Ignore
     private String lastActionTime;
+
     @SerializedName("updatedDate")
-    @Expose
+    @Ignore
     private String updatedDate;
+
     @SerializedName("branchRoles")
-    @Expose
+    @Ignore
     private List<Object> branchRoles = null;
 
+    public User() {
+    }
+
+    @Ignore
     public User(LinkedTreeMap<String, Object> map){
         this.userId = (String) map.get("userId");
         this.username = (String) map.get("username");
@@ -58,6 +82,7 @@ public class User {
 
     }
 
+    @Ignore
     public User(String username, String password) {
         this.username = username;
         this.password = password;

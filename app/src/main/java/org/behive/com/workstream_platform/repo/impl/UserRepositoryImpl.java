@@ -6,6 +6,9 @@ import android.support.annotation.NonNull;
 
 import com.google.gson.internal.LinkedTreeMap;
 
+import org.behive.com.workstream_platform.dao.UserDao;
+import org.behive.com.workstream_platform.executors.ExecutorService;
+import org.behive.com.workstream_platform.executors.ExecutorType;
 import org.behive.com.workstream_platform.http.RestApi;
 import org.behive.com.workstream_platform.model.BaseResponse;
 import org.behive.com.workstream_platform.model.CheckUserResponse;
@@ -14,6 +17,7 @@ import org.behive.com.workstream_platform.model.User;
 import org.behive.com.workstream_platform.repo.UserRepository;
 
 import java.util.List;
+import java.util.concurrent.Executor;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -21,9 +25,12 @@ import retrofit2.Response;
 
 public class UserRepositoryImpl implements UserRepository {
     private RestApi restApi;
+    private UserDao userDao;
 
-    public UserRepositoryImpl(@NonNull RestApi restApi) {
+
+    public UserRepositoryImpl(@NonNull RestApi restApi, UserDao userDao) {
         this.restApi = restApi;
+        this.userDao = userDao;
     }
 
     @Override
@@ -127,5 +134,37 @@ public class UserRepositoryImpl implements UserRepository {
             }
         });
         return userLiveData;
+    }
+
+
+    @Override
+    public void insert(User... users) {
+        getExecutor(ExecutorType.DB_COMMUNICATION).execute(()->{
+            userDao.insert(users);
+        });
+
+    }
+
+    @Override
+    public void update(User... users) {
+        getExecutor(ExecutorType.DB_COMMUNICATION).execute(()->{
+            userDao.update(users);
+        });
+    }
+
+    @Override
+    public void delete(User... users) {
+        getExecutor(ExecutorType.DB_COMMUNICATION).execute(()->{
+            userDao.delete(users);
+        });
+    }
+
+    @Override
+    public LiveData<User> getUserById(String userId) {
+        return userDao.getUserById(userId);
+    }
+
+    private Executor getExecutor(@ExecutorType int type){
+        return ExecutorService.getExecutor(type);
     }
 }

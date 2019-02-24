@@ -13,4 +13,12 @@ public interface UserRepository {
     LiveData<BaseResponse<SignInResponse>> doLogin(User user);
 
     LiveData<BaseResponse<User>> getCurrentUserInfo();
+
+    void insert(User ...users);
+
+    void update(User ...users);
+
+    void delete(User ...users);
+
+    LiveData<User> getUserById(String userId);
 }

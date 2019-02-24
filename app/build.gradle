@@ -50,4 +50,7 @@ dependencies {
     implementation "com.squareup.retrofit2:adapter-rxjava2:$rootProject.ext.retrofitVersion"
 
     implementation "com.squareup.okhttp3:logging-interceptor:$rootProject.ext.okhttpVersion"
+
+    implementation "android.arch.persistence.room:runtime:$rootProject.ext.room_version"
+    annotationProcessor "android.arch.persistence.room:compiler:$rootProject.ext.room_version"
 }

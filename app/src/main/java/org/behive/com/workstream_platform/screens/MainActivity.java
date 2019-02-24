@@ -12,6 +12,7 @@ import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import org.behive.com.workstream_platform.MyApplication;
 import org.behive.com.workstream_platform.R;
@@ -30,6 +31,8 @@ public class MainActivity extends AppCompatActivity implements ActivityView {
     private NavController navController;
     private DrawerLayout drawer;
     private UserRepository userRepository;
+    private TextView firstName;
+    private TextView lastName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +52,9 @@ public class MainActivity extends AppCompatActivity implements ActivityView {
         navigationHeaderView.setOnClickListener(view -> {
             drawer.closeDrawer(GravityCompat.START);
         });
+
+        firstName = navigationHeaderView.findViewById(R.id.first_name);
+        lastName = navigationHeaderView.findViewById(R.id.last_name);
 
 
         NavigationUI.setupWithNavController(toolbar, navController, drawer);
@@ -90,6 +96,9 @@ public class MainActivity extends AppCompatActivity implements ActivityView {
         userRepository.getCurrentUserInfo().observe(this, userBaseResponse -> {
             if (userBaseResponse != null && userBaseResponse.getData() != null){
                 User user = userBaseResponse.getData();
+                firstName.setText(user.getFirstName());
+                lastName.setText(user.getLastName());
+                userRepository.insert(user);
                 AppLog.i(TAG + " getCurrentUserInfo user = " + user);
             } else {
                 AppLog.w(TAG + " getCurrentUserInfo FAIL = ");
