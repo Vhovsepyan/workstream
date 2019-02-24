@@ -15,7 +15,7 @@ import org.behive.com.workstream_platform.model.CheckUserResponse;
 import org.behive.com.workstream_platform.repo.UserRepository;
 import org.behive.com.workstream_platform.screens.BaseVM;
 
-public class CheckUserNameViewModel extends BaseVM {
+public class CheckUserNameViewModel extends BaseVM implements ViewModelAction{
     public ObservableField<String> userName = new ObservableField<>("");
     public ObservableField<String> errorMessage = new ObservableField<>("");
     private LiveData<BaseResponse<CheckUserResponse>> userNameResponse;
@@ -29,7 +29,7 @@ public class CheckUserNameViewModel extends BaseVM {
         userNameResponse = Transformations.switchMap(userNameLiveData, data -> userRepository.checkUserName(data));
     }
 
-    public void checkUser() {
+    private void checkUser() {
         String text = userName.get();
         if (TextUtils.isEmpty(text)) {
             errorMessage.set(getString(R.string.incorrect_username_text));
@@ -38,11 +38,16 @@ public class CheckUserNameViewModel extends BaseVM {
         userNameLiveData.setValue(text);
     }
 
-    public LiveData<BaseResponse<CheckUserResponse>> getUserNameResponse() {
+    LiveData<BaseResponse<CheckUserResponse>> getUserNameResponse() {
         return userNameResponse;
     }
 
-    public void setErrorMessage(String errorMessage) {
+    void setErrorMessage(String errorMessage) {
         this.errorMessage.set(errorMessage);
+    }
+
+    @Override
+    public void actionDone() {
+        checkUser();
     }
 }

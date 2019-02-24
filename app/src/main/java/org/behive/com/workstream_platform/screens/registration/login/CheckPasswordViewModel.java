@@ -16,7 +16,7 @@ import org.behive.com.workstream_platform.model.User;
 import org.behive.com.workstream_platform.repo.UserRepository;
 import org.behive.com.workstream_platform.screens.BaseVM;
 
-public class CheckPasswordViewModel extends BaseVM {
+public class CheckPasswordViewModel extends BaseVM implements ViewModelAction{
     public ObservableField<String> password = new ObservableField<>("");
     public ObservableField<String> errorMessage = new ObservableField<>("");
     private LiveData<BaseResponse<SignInResponse>> signInResponse;
@@ -33,7 +33,7 @@ public class CheckPasswordViewModel extends BaseVM {
         });
     }
 
-    public void checkPassowrdAndSignIn() {
+    private void checkPassowrdAndSignIn() {
         String text = password.get();
         if (TextUtils.isEmpty(text)) {
             errorMessage.set(getString(R.string.incorrect_password_text));
@@ -43,11 +43,16 @@ public class CheckPasswordViewModel extends BaseVM {
     }
 
 
-    public LiveData<BaseResponse<SignInResponse>> getSignInResponse() {
+    LiveData<BaseResponse<SignInResponse>> getSignInResponse() {
         return signInResponse;
     }
 
-    public void setErrorMessage(String errorMessage) {
+    void setErrorMessage(String errorMessage) {
         this.errorMessage.set(errorMessage);
+    }
+
+    @Override
+    public void actionDone() {
+        checkPassowrdAndSignIn();
     }
 }
