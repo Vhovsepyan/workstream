@@ -57,27 +57,27 @@ public class UserRepositoryImpl implements UserRepository {
                 if (responseBody != null) {
                     Object data = responseBody.getData();
 
-                    if (data instanceof List) {
+                    if (!responseBody.isSuccess()) {
                         List<LinkedTreeMap<String, String>> linkedTreeMaps = (List<LinkedTreeMap<String, String>>) data;
-                        LinkedTreeMap<String, String> err_data = linkedTreeMaps.get(0);
-                        String value_key = err_data.get("key");
-                        String value_message = err_data.get("message");
-                        signInResponse.setKey(value_key);
-                        signInResponse.setMessage(value_message);
+                        LinkedTreeMap<String, String> errData = linkedTreeMaps.get(0);
+                        String key = errData.get("key");
+                        String message = errData.get("message");
+                        signInResponse.setKey(key);
+                        signInResponse.setMessage(message);
                     } else {
-                        LinkedTreeMap<String, String> success_data = (LinkedTreeMap<String, String>) data;
-                        signInResponse.setAccessToken(success_data.get("accessToken"));
-                        signInResponse.setRefreshToken(success_data.get("refreshToken"));
-                        signInResponse.setTokenType(success_data.get("tokenType"));
+                        LinkedTreeMap<String, String> successData = (LinkedTreeMap<String, String>) data;
+                        signInResponse.setAccessToken(successData.get("accessToken"));
+                        signInResponse.setRefreshToken(successData.get("refreshToken"));
+                        signInResponse.setTokenType(successData.get("tokenType"));
                     }
 
                     responseBaseResponse = new BaseResponse<>();
                     responseBaseResponse.setStatus(responseBody.getStatus());
-                    responseBaseResponse.setErrorMessage(responseBody.getErrorMessage());
-                    responseBaseResponse.setSuccess(responseBody.getSuccess());
+                    responseBaseResponse.setSuccess(responseBody.isSuccess());
                     responseBaseResponse.setData(signInResponse);
                 } else {
-                    responseBaseResponse = null;
+                    responseBaseResponse = new BaseResponse<>();
+                    responseBaseResponse.setErrorMessage("responseBody == null");
                 }
                 baseResponseMutableLiveData.setValue(responseBaseResponse);
             }
@@ -90,5 +90,42 @@ public class UserRepositoryImpl implements UserRepository {
             }
         });
         return baseResponseMutableLiveData;
+    }
+
+    @Override
+    public LiveData<BaseResponse<User>> getCurrentUserInfo() {
+        MutableLiveData<BaseResponse<User>> userLiveData = new MutableLiveData<>();
+        restApi.getCurrentUserInfo().enqueue(new Callback<BaseResponse<Object>>() {
+            @Override
+            public void onResponse(Call<BaseResponse<Object>> call, Response<BaseResponse<Object>> response) {
+                BaseResponse<Object> responseBody = response.body();
+                BaseResponse<User> userBaseResponse = new BaseResponse<>();
+                if (responseBody != null ){
+                    Object data = responseBody.getData();
+                    if (responseBody.isSuccess()){
+                        userBaseResponse.setSuccess(responseBody.isSuccess());
+                        userBaseResponse.setStatus(responseBody.getStatus());
+                        User user = new User((LinkedTreeMap<String, Object>) data);
+                        userBaseResponse.setData(user);
+                    } else {
+                        List<LinkedTreeMap<String, String>> linkedTreeMaps = (List<LinkedTreeMap<String, String>>) data;
+                        LinkedTreeMap<String, String> errData = linkedTreeMaps.get(0);
+                        userBaseResponse.setErrorMessage(errData.get("message"));
+                    }
+                } else {
+                    userBaseResponse.setErrorMessage("responseBody == null");
+                }
+                userLiveData.setValue(userBaseResponse);
+
+            }
+
+            @Override
+            public void onFailure(Call<BaseResponse<Object>> call, Throwable t) {
+                BaseResponse<User> baseResponse = new BaseResponse<>();
+                baseResponse.setErrorMessage(t.getMessage());
+                userLiveData.setValue(baseResponse);
+            }
+        });
+        return userLiveData;
     }
 }

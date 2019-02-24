@@ -19,7 +19,7 @@ public class BaseResponse<T> {
 
     private String errorMessage;
 
-    public boolean getSuccess() {
+    public boolean isSuccess() {
         return success;
     }
 

@@ -45,7 +45,7 @@ public class CheckUserNameFragment extends BaseFragment<CheckUsernameFragmentBin
         viewModel.getUserNameResponse().observe(this, new Observer<BaseResponse<CheckUserResponse>>() {
             @Override
             public void onChanged(@Nullable BaseResponse<CheckUserResponse> baseResponse) {
-                if (baseResponse != null && baseResponse.getSuccess()) {
+                if (baseResponse != null && baseResponse.isSuccess()) {
                     if (baseResponse.getData() != null && !baseResponse.getData().getResult()) {
                         viewModel.setErrorMessage("");
                         AppLog.i(TAG + " baseResponse = " + baseResponse);

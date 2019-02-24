@@ -8,9 +8,10 @@ import org.behive.com.workstream_platform.BuildConfig;
 
 public class AppLog {
     private static final boolean isDebug = BuildConfig.DEBUG;
-
+    private static final String BASE_TAG = "test_app ";
     public static int v(String tag, String msg) {
         if (isDebug) {
+            msg = BASE_TAG + msg;
             final StackTraceElement stackTrace = new Exception().getStackTrace()[1];
             String st = getStackTraceInfo(stackTrace);
             return Log.v(tag, st + ": " + msg);
@@ -20,6 +21,7 @@ public class AppLog {
 
     public static int v(String msg) {
         if (isDebug) {
+            msg = BASE_TAG + msg;
             final StackTraceElement stackTrace = new Exception().getStackTrace()[1];
             String st = getStackTraceInfo(stackTrace);
             return Log.v(st, msg);
@@ -29,6 +31,7 @@ public class AppLog {
 
     public static int d(String tag, String msg) {
         if (isDebug) {
+            msg = BASE_TAG + msg;
             final StackTraceElement stackTrace = new Exception().getStackTrace()[1];
             String st = getStackTraceInfo(stackTrace);
             return Log.d(tag, st + ": " + msg);
@@ -38,6 +41,7 @@ public class AppLog {
 
     public static int d(String msg) {
         if (isDebug) {
+            msg = BASE_TAG + msg;
             final StackTraceElement stackTrace = new Exception().getStackTrace()[1];
             String st = getStackTraceInfo(stackTrace);
             return Log.d(st, msg);
@@ -47,6 +51,7 @@ public class AppLog {
 
     public static int i(String tag, String msg) {
         if (isDebug) {
+            msg = BASE_TAG + msg;
             final StackTraceElement stackTrace = new Exception().getStackTrace()[1];
             String st = getStackTraceInfo(stackTrace);
             return Log.i(tag, st + ": " + msg);
@@ -56,6 +61,7 @@ public class AppLog {
 
     public static int i(String msg) {
         if (isDebug) {
+            msg = BASE_TAG + msg;
             final StackTraceElement stackTrace = new Exception().getStackTrace()[1];
             String st = getStackTraceInfo(stackTrace);
             return Log.i(st, msg);
@@ -65,6 +71,7 @@ public class AppLog {
 
     public static int w(String tag, String msg) {
         if (isDebug) {
+            msg = BASE_TAG + msg;
             final StackTraceElement stackTrace = new Exception().getStackTrace()[1];
             String st = getStackTraceInfo(stackTrace);
             return Log.w(tag, st + ": " + msg);
@@ -74,6 +81,7 @@ public class AppLog {
 
     public static int w(String msg) {
         if (isDebug) {
+            msg = BASE_TAG + msg;
             final StackTraceElement stackTrace = new Exception().getStackTrace()[1];
             String st = getStackTraceInfo(stackTrace);
             return Log.w(st, msg);
@@ -83,6 +91,7 @@ public class AppLog {
 
     public static int e(String tag, String msg) {
         if (isDebug) {
+            msg = BASE_TAG + msg;
             final StackTraceElement stackTrace = new Exception().getStackTrace()[1];
             String st = getStackTraceInfo(stackTrace);
             return Log.e(tag, st + ": " + msg);
@@ -92,6 +101,7 @@ public class AppLog {
 
     public static int e(String msg) {
         if (isDebug) {
+            msg = BASE_TAG + msg;
             final StackTraceElement stackTrace = new Exception().getStackTrace()[1];
             String st = getStackTraceInfo(stackTrace);
             return Log.e(st, msg);

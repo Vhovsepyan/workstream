@@ -41,7 +41,8 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         navController = activityView.getNavController();
-        if (TextUtils.isEmpty(SharedPrefs.getInstance().getString(SharedPrefs.Constants.IS_USER_LOGGED_IN_KEY, ""))) {
+        String token = SharedPrefs.getInstance().getString(SharedPrefs.Constants.IS_USER_LOGGED_IN_KEY, "");
+        if (TextUtils.isEmpty(token)) {
             navController.popBackStack();
             navController.navigate(R.id.navigation2);
             return null;

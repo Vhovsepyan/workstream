@@ -17,6 +17,9 @@ public interface RestApi {
     @GET("/account/check")
     Call<BaseResponse<CheckUserResponse>> checkUserName(@Query("username") String userName);
 
+    @GET("/account/get")
+    Call<BaseResponse<Object>> getCurrentUserInfo();
+
     @POST("/account/signin")
     Call<BaseResponse<Object>> doLogin(@Body User user);
 

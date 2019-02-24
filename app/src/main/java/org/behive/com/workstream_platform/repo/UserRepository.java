@@ -11,4 +11,6 @@ public interface UserRepository {
     LiveData<BaseResponse<CheckUserResponse>> checkUserName(String userName);
 
     LiveData<BaseResponse<SignInResponse>> doLogin(User user);
+
+    LiveData<BaseResponse<User>> getCurrentUserInfo();
 }

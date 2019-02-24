@@ -1,6 +1,7 @@
 package org.behive.com.workstream_platform.screens.registration.login;
 
 import android.arch.lifecycle.ViewModelProviders;
+import android.view.View;
 import android.widget.EditText;
 
 import org.behive.com.workstream_platform.BR;
@@ -10,6 +11,7 @@ import org.behive.com.workstream_platform.http.RestApiFactory;
 import org.behive.com.workstream_platform.model.SignInResponse;
 import org.behive.com.workstream_platform.screens.BaseFragment;
 import org.behive.com.workstream_platform.screens.BaseVM;
+import org.behive.com.workstream_platform.screens.MainActivity;
 import org.behive.com.workstream_platform.utils.AppLog;
 import org.behive.com.workstream_platform.utils.SharedPrefs;
 import org.behive.com.workstream_platform.utils.Utils;
@@ -23,7 +25,7 @@ public class CheckPasswordFragment extends BaseFragment<CheckPasswordFragmentBin
     protected BaseVM onCreateViewModel() {
         viewModel = ViewModelProviders.of(this).get(CheckPasswordViewModel.class);
         viewModel.getSignInResponse().observe(this, baseResponse -> {
-            if (baseResponse.getSuccess()) {
+            if (baseResponse.isSuccess()) {
                 SignInResponse data = baseResponse.getData();
                 if (data != null) {
                     viewModel.setErrorMessage("");
@@ -36,8 +38,11 @@ public class CheckPasswordFragment extends BaseFragment<CheckPasswordFragmentBin
                             SharedPrefs.Constants.IS_USER_LOGGED_IN_KEY,
                             stringBuilder.toString());
                     if (isSuccess) {
-                        Utils.hideKeyboardFrom(editText, getActivity());
                         RestApiFactory.recreateRestApi();
+                        MainActivity activity = (MainActivity) getActivity();
+                        Utils.hideKeyboardFrom(editText, activity);
+                        getToolbarCustomLayout(activity).setVisibility(View.VISIBLE);
+                        activity.updateUserInfo();
                         getNavController().navigate(R.id.action_checkPasswordFragment_to_homeFragment);
                     }
                 } else {

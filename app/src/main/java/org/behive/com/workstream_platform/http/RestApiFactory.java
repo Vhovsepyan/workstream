@@ -1,5 +1,6 @@
 package org.behive.com.workstream_platform.http;
 
+import org.behive.com.workstream_platform.utils.AppLog;
 import org.behive.com.workstream_platform.utils.SharedPrefs;
 import org.behive.com.workstream_platform.utils.UrlConstants;
 
@@ -10,6 +11,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RestApiFactory {
+    private static final String TAG = RestApiFactory.class.getSimpleName();
     private static RestApi restApi;
 
     private static RestApi create() {
@@ -39,11 +41,13 @@ public class RestApiFactory {
     public static RestApi getRestApi() {
         if (restApi == null) {
             restApi = RestApiFactory.create();
+            AppLog.i(TAG + " getRestApi API created ");
         }
         return restApi;
     }
 
     public static void recreateRestApi(){
         restApi = RestApiFactory.create();
+        AppLog.i(TAG + " recreateRestApi API created ");
     }
 }
