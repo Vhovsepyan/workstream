@@ -8,12 +8,12 @@ import android.databinding.ObservableField;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
+import org.behive.com.workstream_platform.MyApplication;
 import org.behive.com.workstream_platform.R;
 import org.behive.com.workstream_platform.model.BaseResponse;
 import org.behive.com.workstream_platform.model.SignInResponse;
 import org.behive.com.workstream_platform.model.User;
 import org.behive.com.workstream_platform.repo.UserRepository;
-import org.behive.com.workstream_platform.repo.impl.UserRepositoryImpl;
 import org.behive.com.workstream_platform.screens.BaseVM;
 
 public class CheckPasswordViewModel extends BaseVM {
@@ -22,11 +22,10 @@ public class CheckPasswordViewModel extends BaseVM {
     private LiveData<BaseResponse<SignInResponse>> signInResponse;
     private MutableLiveData<String> passwordLiveData = new MutableLiveData<>();
     private UserRepository userRepository;
-    private String userName;
 
     public CheckPasswordViewModel(@NonNull Application application) {
         super(application);
-        userRepository = UserRepositoryImpl.getsInstance();
+        userRepository = ((MyApplication) application).getUserRepository();
 
         signInResponse = Transformations.switchMap(passwordLiveData, data -> {
             User user = new User("planet1", data);

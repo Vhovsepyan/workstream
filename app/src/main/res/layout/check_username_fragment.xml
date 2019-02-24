@@ -5,7 +5,7 @@
 
     <data>
 
-        <import type="android.text.TextUtils"/>
+        <import type="android.text.TextUtils" />
 
         <variable
             name="emptyString"
@@ -13,7 +13,7 @@
 
         <variable
             name="viewModel"
-            type="org.behive.com.workstream_platform.screens.registration.login.LoginViewModel" />
+            type="org.behive.com.workstream_platform.screens.registration.login.CheckUserNameViewModel" />
     </data>
 
     <android.support.constraint.ConstraintLayout
@@ -26,6 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/padding"
             android:src="@drawable/app_icon_white"
+            android:tint="@color/silver"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -45,7 +46,7 @@
             tools:text="@string/enter_your_username_text" />
 
         <TextView
-            android:id="@+id/username_text_view"
+            android:id="@+id/password_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/padding"
@@ -67,11 +68,11 @@
             android:autofillHints=""
             android:background="@null"
             android:inputType="none"
-            android:textSize="@dimen/small_text_size"
             android:text="@={viewModel.userName}"
+            android:textSize="@dimen/small_text_size"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/username_text_view"
+            app:layout_constraintTop_toBottomOf="@id/password_text_view"
             app:requestFocus="@{emptyString}" />
 
         <View
@@ -79,13 +80,12 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginStart="@dimen/padding"
-            android:layout_marginEnd="@dimen/padding"
             android:layout_marginTop="@dimen/padding"
+            android:layout_marginEnd="@dimen/padding"
             android:background="@{TextUtils.isEmpty(viewModel.errorMessage)? @color/silver :@color/watermelon }"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/username_edit_text"
-            />
+            app:layout_constraintTop_toBottomOf="@+id/username_edit_text" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -96,7 +96,7 @@
             android:textSize="@dimen/small_text_size"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/line"
-            tools:text="@string/something_went_wrong_text"/>
+            tools:text="@string/something_went_wrong_text" />
 
 
         <ImageView
@@ -104,10 +104,10 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@drawable/bg"
+            android:onClick="@{(view) -> viewModel.checkUser()}"
             android:src="@drawable/ic_arrow_forward_white_24dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:onClick="@{(view) -> viewModel.checkUser()}"
             tools:src="@drawable/ic_arrow_forward_white_24dp" />
 
     </android.support.constraint.ConstraintLayout>

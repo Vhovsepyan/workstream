@@ -2,9 +2,9 @@ package org.behive.com.workstream_platform.repo.impl;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
+import android.support.annotation.NonNull;
 
 import org.behive.com.workstream_platform.http.RestApi;
-import org.behive.com.workstream_platform.http.RestApiFactory;
 import org.behive.com.workstream_platform.model.BaseResponse;
 import org.behive.com.workstream_platform.model.task.Task;
 import org.behive.com.workstream_platform.repo.TaskRepository;
@@ -18,15 +18,19 @@ import retrofit2.Response;
 
 public class TaskRepositoryImpl implements TaskRepository {
     private static final String TAG = TaskRepositoryImpl.class.getSimpleName();
-    private RestApi restApi;
+    private final RestApi restApi;
+
+    public TaskRepositoryImpl(@NonNull RestApi restApi) {
+        this.restApi = restApi;
+    }
 
     @Override
     public LiveData<List<Task>> getTaskList(String branchId) {
         MutableLiveData<List<Task>> mutableLiveData = new MutableLiveData<>();
-        getRestApi().getTaskList(branchId).enqueue(new Callback<BaseResponse<List<Task>>>() {
+        restApi.getTaskList(branchId).enqueue(new Callback<BaseResponse<List<Task>>>() {
             @Override
-            public void onResponse(Call<BaseResponse<List<Task>>> call, Response<BaseResponse<List<Task>>> response) {
-                if (response != null && response.body() != null) {
+            public void onResponse(@NonNull Call<BaseResponse<List<Task>>> call, @NonNull Response<BaseResponse<List<Task>>> response) {
+                if (response.body() != null) {
                     List<Task> taskList = response.body().getData();
                     mutableLiveData.postValue(taskList);
                 }
@@ -34,7 +38,7 @@ public class TaskRepositoryImpl implements TaskRepository {
             }
 
             @Override
-            public void onFailure(Call<BaseResponse<List<Task>>> call, Throwable t) {
+            public void onFailure(@NonNull Call<BaseResponse<List<Task>>> call, @NonNull Throwable t) {
                 AppLog.e(TAG + " " + t.getMessage());
 
             }
@@ -43,10 +47,4 @@ public class TaskRepositoryImpl implements TaskRepository {
         return mutableLiveData;
     }
 
-    private RestApi getRestApi() {
-        if (restApi == null) {
-            restApi = RestApiFactory.create();
-        }
-        return restApi;
-    }
 }

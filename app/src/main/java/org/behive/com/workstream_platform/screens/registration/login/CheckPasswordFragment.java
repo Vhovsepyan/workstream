@@ -6,6 +6,7 @@ import android.widget.EditText;
 import org.behive.com.workstream_platform.BR;
 import org.behive.com.workstream_platform.R;
 import org.behive.com.workstream_platform.databinding.CheckPasswordFragmentBinding;
+import org.behive.com.workstream_platform.http.RestApiFactory;
 import org.behive.com.workstream_platform.model.SignInResponse;
 import org.behive.com.workstream_platform.screens.BaseFragment;
 import org.behive.com.workstream_platform.screens.BaseVM;
@@ -22,7 +23,7 @@ public class CheckPasswordFragment extends BaseFragment<CheckPasswordFragmentBin
     protected BaseVM onCreateViewModel() {
         viewModel = ViewModelProviders.of(this).get(CheckPasswordViewModel.class);
         viewModel.getSignInResponse().observe(this, baseResponse -> {
-            if (baseResponse != null && baseResponse.getSuccess()) {
+            if (baseResponse.getSuccess()) {
                 SignInResponse data = baseResponse.getData();
                 if (data != null) {
                     viewModel.setErrorMessage("");
@@ -36,6 +37,7 @@ public class CheckPasswordFragment extends BaseFragment<CheckPasswordFragmentBin
                             stringBuilder.toString());
                     if (isSuccess) {
                         Utils.hideKeyboardFrom(editText, getActivity());
+                        RestApiFactory.recreateRestApi();
                         getNavController().navigate(R.id.action_checkPasswordFragment_to_homeFragment);
                     }
                 } else {
@@ -43,8 +45,13 @@ public class CheckPasswordFragment extends BaseFragment<CheckPasswordFragmentBin
                     AppLog.e(TAG + " baseResponse = " + baseResponse);
                 }
             } else {
-                viewModel.setErrorMessage(getString(R.string.something_went_wrong_text));
-                AppLog.e(TAG + " baseResponse = " + baseResponse);
+                if (baseResponse.getData() != null){
+                    viewModel.setErrorMessage(baseResponse.getData().getMessage());
+                    AppLog.e(TAG + " baseResponse = " + baseResponse);
+                } else {
+                    viewModel.setErrorMessage(getString(R.string.something_went_wrong_text));
+                    AppLog.e(TAG + " baseResponse = " + baseResponse);
+                }
             }
         });
         return viewModel;

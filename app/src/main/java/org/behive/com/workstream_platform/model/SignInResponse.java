@@ -14,6 +14,28 @@ public class SignInResponse {
     @SerializedName("refreshToken")
     @Expose
     private String refreshToken;
+    @SerializedName("key")
+    @Expose
+    private String key;
+    @SerializedName("message")
+    @Expose
+    private String message;
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
 
     public String getTokenType() {
         return tokenType;

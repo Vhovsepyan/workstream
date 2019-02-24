@@ -10,8 +10,9 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RestApiFactory {
+    private static RestApi restApi;
 
-    public static RestApi create() {
+    private static RestApi create() {
         String token = SharedPrefs.getInstance().getString(SharedPrefs.Constants.IS_USER_LOGGED_IN_KEY, "");
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
         logging.setLevel(HttpLoggingInterceptor.Level.BODY);
@@ -33,5 +34,16 @@ public class RestApiFactory {
                 .client(httpClient.build())
                 .build();
         return retrofit.create(RestApi.class);
+    }
+
+    public static RestApi getRestApi() {
+        if (restApi == null) {
+            restApi = RestApiFactory.create();
+        }
+        return restApi;
+    }
+
+    public static void recreateRestApi(){
+        restApi = RestApiFactory.create();
     }
 }

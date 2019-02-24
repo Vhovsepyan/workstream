@@ -9,24 +9,19 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 
 import org.behive.com.workstream_platform.BR;
 import org.behive.com.workstream_platform.R;
 import org.behive.com.workstream_platform.databinding.CheckUsernameFragmentBinding;
 import org.behive.com.workstream_platform.model.BaseResponse;
 import org.behive.com.workstream_platform.model.CheckUserResponse;
-import org.behive.com.workstream_platform.screens.ActivityView;
 import org.behive.com.workstream_platform.screens.BaseFragment;
 import org.behive.com.workstream_platform.screens.BaseVM;
-import org.behive.com.workstream_platform.screens.MainActivity;
 import org.behive.com.workstream_platform.utils.AppLog;
-
-import androidx.navigation.NavController;
 
 public class CheckUserNameFragment extends BaseFragment<CheckUsernameFragmentBinding> {
     private static final String TAG = CheckUserNameFragment.class.getSimpleName();
-    private LoginViewModel viewModel;
+    private CheckUserNameViewModel viewModel;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -46,7 +41,7 @@ public class CheckUserNameFragment extends BaseFragment<CheckUsernameFragmentBin
 
     @Override
     protected BaseVM onCreateViewModel() {
-        viewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
+        viewModel = ViewModelProviders.of(this).get(CheckUserNameViewModel.class);
         viewModel.getUserNameResponse().observe(this, new Observer<BaseResponse<CheckUserResponse>>() {
             @Override
             public void onChanged(@Nullable BaseResponse<CheckUserResponse> baseResponse) {
